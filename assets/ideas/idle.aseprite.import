@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://dh13tcc6rsspl"
+path="res://.godot/imported/idle.aseprite-7d23e4da7035b4888fa4d091becfb09a.res"
+
+[deps]
+
+source_file="res://assets/ideas/idle.aseprite"
+dest_files=["res://.godot/imported/idle.aseprite-7d23e4da7035b4888fa4d091becfb09a.res"]
+
+[params]
+
