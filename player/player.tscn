@@ -235,11 +235,6 @@ animations = [{
 "loop": true,
 "name": &"move",
 "speed": 13.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5jp0"]
@@ -253,7 +248,7 @@ script = ExtResource("1_ocd3p")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_7ofc3")
-animation = &"new_animation"
+animation = &"move"
 autoplay = "idle"
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,

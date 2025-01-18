@@ -1,0 +1,6 @@
+[-5,16,0]
+-1,0,0,0|||world/test_world.tscn
+[-4,16,0]
+-1,0,-1,0|||world/test_world.tscn
+[-3,16,0]
+0,0,-1,0|||world/test_world.tscn

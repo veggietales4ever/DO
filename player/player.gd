@@ -48,7 +48,7 @@ func movement(delta):
 		jump_count += 1
 		velocity.y -= jump
 		velocity.x = input
-	if !is_on_floor() && Input.is_action_just_pressed("ui_accept") && jump_count < max_jump:
+	if !is_on_floor() && Input.is_action_pressed("ui_accept") && jump_count < max_jump:
 		jump_count += 1
 		velocity.y -= jump
 		velocity.x = input
