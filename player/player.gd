@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 var input
+var crouching = false
+@onready var animated_sprite: AnimatedSprite2D =$AnimatedSprite2D
+
 @export var speed = 60
 @export var gravity = 10
 
@@ -11,7 +14,14 @@ var jump_count = 0
 
 
 
-func _process(delta: float) -> void:
+func _ready() -> void:
+	pass
+
+	
+
+
+
+func _physics_process(delta: float) -> void:
 	movement(delta)
 
 func movement(delta):
@@ -21,28 +31,41 @@ func movement(delta):
 		if input > 0:
 			velocity.x += speed * delta
 			velocity.x = clamp(speed, 60.0, speed)
-			$AnimatedSprite2D.scale.x = -1
-			$AnimatedSprite2D.animation = "move"
+			animated_sprite.scale.x = 1
+			animated_sprite.animation = "idle"
 		if input < 0:
 			velocity.x -= speed * delta
 			velocity.x = clamp(-speed, 60.0, -speed)
-			$AnimatedSprite2D.scale.x = 1
-			$AnimatedSprite2D.animation = "move"
+			animated_sprite.scale.x = -1
+			animated_sprite.animation = "idle"
 			
 		
 	if input == 0:
 		velocity.x = 0
-		$AnimatedSprite2D.animation = "idle"
+		animated_sprite.animation = "idle"
 		
+	# Crouch Code
+	if Input.get_action_strength("down") && is_on_floor():
+		animated_sprite.animation = "crouching"
+		crouching = true
+		if crouching && input > 0:
+			velocity.x = 0
+		if crouching && input < 0:
+			velocity.x = 0
+
+		
+	if Input.is_action_pressed("down") && is_on_floor() && crouching == true:
+		animated_sprite.animation = "crouching"
+		#print(animated_sprite.animation)
 # Jump Code
 	if is_on_floor():
 		jump_count = 0
 		
-	if !is_on_floor():
-		if velocity.y < 0:
-			$AnimatedSprite2D.animation = "jump"
-		if velocity.y > 0:
-			$AnimatedSprite2D.animation = "fall"
+	#if !is_on_floor():
+		#if velocity.y < 0:
+			#animated_sprite.animation = "jump"
+		#if velocity.y > 0:
+			#animated_sprite.animation = "fall"
 			
 	if Input.is_action_pressed("ui_accept") && is_on_floor() && jump_count < max_jump:
 		jump_count += 1
@@ -62,6 +85,7 @@ func movement(delta):
 	gravity_force()
 	move_and_slide()
 
+	
 func gravity_force():
 	velocity.y += gravity
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
