@@ -1,11 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6l2ws7xaaugs"]
+[gd_scene load_steps=4 format=3 uid="uid://b6l2ws7xaaugs"]
 
 [ext_resource type="PackedScene" uid="uid://bxnpaj3s1fpv3" path="res://player/player.tscn" id="1_12yx6"]
+[ext_resource type="Texture2D" uid="uid://8spk7r8nsn5x" path="res://assets/icon.svg" id="2_x2xn1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlbmw"]
+size = Vector2(26, 26)
 
 [node name="TestWorld" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_12yx6")]
 position = Vector2(159, 129)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -72)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(160, 47)
+
+[node name="ground" type="Node2D" parent="."]
+position = Vector2(162, 163)
+
+[node name="temporary_ground" type="StaticBody2D" parent="ground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ground/temporary_ground"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_x2xn1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground/temporary_ground"]
+shape = SubResource("RectangleShape2D_nlbmw")
+
+[node name="temporary_ground2" type="StaticBody2D" parent="ground"]
+position = Vector2(26, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ground/temporary_ground2"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_x2xn1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground/temporary_ground2"]
+shape = SubResource("RectangleShape2D_nlbmw")
+
+[node name="temporary_ground3" type="StaticBody2D" parent="ground"]
+position = Vector2(-27, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ground/temporary_ground3"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_x2xn1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground/temporary_ground3"]
+shape = SubResource("RectangleShape2D_nlbmw")
