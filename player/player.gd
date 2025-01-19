@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var input
 var crouching = false
-var default_speed = 1
+var default_speed = .75
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var anim: AnimationPlayer = $anim
