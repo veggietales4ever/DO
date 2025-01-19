@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://bjw1iqnx6e385"
+path="res://.godot/imported/charactersword.aseprite-212d61a55c1d7c7a117d0be65cedd1dd.res"
+
+[deps]
+
+source_file="res://assets/ideas/charactersword.aseprite"
+dest_files=["res://.godot/imported/charactersword.aseprite-212d61a55c1d7c7a117d0be65cedd1dd.res"]
+
+[params]
+
