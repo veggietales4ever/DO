@@ -1,6 +1,7 @@
-extends CharacterBody2D
+extends Entity
 
 @onready var player_graphics: Node2D = $PlayerGraphics
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export_group('move')
 @export var speed := 100 # := is the data type of first value is the only data type this var can accept.
@@ -20,9 +21,16 @@ var jump := false
 var faster_fall := false
 var gravity_multiplier := 1
 
+@export_group('weapon')
+var current_sword = Global.swords.LONGSWORD
+var attacking := false
+@export_range(0.1,2) var attack_cooldown := 0.5
+
 func _ready() -> void:
 	$Timers/DashCooldown.wait_time = dash_cooldown
-
+	$Timers/AttackCooldown.wait_time = attack_cooldown
+	player_graphics.connect("attack_finished", Callable(self, "_on_attack_finished"))
+	
 func _process(delta: float) -> void:
 	apply_gravity(delta)
 	
@@ -30,9 +38,9 @@ func _process(delta: float) -> void:
 		get_input()
 		apply_movement(delta)
 		animate()
-		
+
 func animate():
-	player_graphics.update_sprite(direction, is_on_floor(), crouching) # direction of player, if they're on the floor, crouching or not
+	player_graphics.update_sprite(direction, is_on_floor(), crouching, attacking) # direction of player, if they're on the floor, crouching or not
 
 func get_input():
 	# horizontal movement
@@ -56,6 +64,9 @@ func get_input():
 	# Crouching
 	crouching = Input.is_action_pressed("down") and is_on_floor()
 	
+	# Attacking
+	if Input.is_action_just_pressed("attack"):
+		attacking = true
 
 func apply_movement(delta):
 	# Left / Right movement
@@ -95,3 +106,17 @@ func apply_gravity(delta):
 func on_dash_finish():
 	velocity.x = move_toward(velocity.x, 0, 900)
 	gravity_multiplier = 1
+
+#func attack():
+	#attacking = true
+	##$Timers/AttackCooldown.start()
+	##attacking = true
+	##if $Timers/AttackCooldown.start:
+		##print("attack cooldown started")
+		##attacking = true
+		##if attacking:
+			##velocity.x = 0
+			##jump = false
+
+func _on_attack_finished():
+	attacking = false

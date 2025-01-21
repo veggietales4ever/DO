@@ -26,6 +26,7 @@ general/default_playback_type.web=0
 [autoload]
 
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
+Global="*res://global/global.gd"
 
 [display]
 
@@ -38,6 +39,10 @@ window/stretch/mode="viewport"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg")
+
+[global_group]
+
+Player=""
 
 [input]
 

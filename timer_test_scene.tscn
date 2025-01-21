@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfpkibc4odroc"]
+
+[ext_resource type="Script" path="res://timer_test_scene.gd" id="1_mtugl"]
+[ext_resource type="PackedScene" uid="uid://cem7r4j8s7g4n" path="res://entities/player/player.tscn" id="2_h430u"]
+
+[node name="TimerTestScene" type="Node2D"]
+script = ExtResource("1_mtugl")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Player" parent="." instance=ExtResource("2_h430u")]
+position = Vector2(160, 119)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
