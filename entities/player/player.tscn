@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cem7r4j8s7g4n"]
+
+[ext_resource type="PackedScene" uid="uid://vl613h1q7jq" path="res://entities/entity.tscn" id="1_fdhh2"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="2_xgaa1"]
+[ext_resource type="PackedScene" uid="uid://dsu4c1dt8oc6g" path="res://entities/player/player_graphics.tscn" id="3_mhvr8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mck4p"]
+radius = 5.0
+height = 32.0
+
+[node name="Player" instance=ExtResource("1_fdhh2")]
+script = ExtResource("2_xgaa1")
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("CapsuleShape2D_mck4p")
+
+[node name="PlayerGraphics" parent="." index="1" instance=ExtResource("3_mhvr8")]
+
+[node name="Camera2D" type="Camera2D" parent="." index="2"]
+
+[node name="JumpBuffer" type="Timer" parent="Timers" index="0"]
+wait_time = 0.1
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="Timers" index="1"]
+one_shot = true

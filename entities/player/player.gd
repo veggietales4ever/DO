@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
+@onready var player_graphics: Node2D = $PlayerGraphics
+
 @export_group('move')
-@export var speed := 200 # := is the data type of first value is the only data type this var can accept.
+@export var speed := 100 # := is the data type of first value is the only data type this var can accept.
 @export var acceleration := 1200
 @export var friction := 1800
 var direction := Vector2.ZERO
@@ -27,7 +29,11 @@ func _process(delta: float) -> void:
 	if can_move:
 		get_input()
 		apply_movement(delta)
+		animate()
 		
+func animate():
+	player_graphics.update_sprite(direction, is_on_floor(), crouching) # direction of player, if they're on the floor, crouching or not
+
 func get_input():
 	# horizontal movement
 	direction.x = Input.get_axis("left", "right")
@@ -49,7 +55,8 @@ func get_input():
 		
 	# Crouching
 	crouching = Input.is_action_pressed("down") and is_on_floor()
-		
+	
+
 func apply_movement(delta):
 	# Left / Right movement
 	if direction.x:
@@ -59,6 +66,7 @@ func apply_movement(delta):
 		
 	if crouching:
 		velocity.x = 0
+		jump = false
 		
 	# Jump
 	if jump:# or $Timers/JumpBuffer.time_left and is_on_floor():
