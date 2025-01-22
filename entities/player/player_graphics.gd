@@ -13,23 +13,13 @@ func update_sprite(direction, on_floor, crouching, attacking):
 	# Flip
 	if direction.x:
 		$Sprite2D.flip_h = direction.x < 0
-
-	# State
-	#var state = 'idle' if not crouching else 'crouching'
-	#if on_floor and direction.x and not crouching: # If on the floor and moving, and not crouching
-		#state = 'run'
-	#if not on_floor:
-		#state = 'jump'
-	#if on_floor and attacking:
-		#state = 'attacking'
-	#animation_player.play(state)
 	
 	# State
 	var state = 'idle'
 	
 	#Prioritize attacking
 	if attacking:
-		state = "attack"
+		state = 'attack'
 	elif crouching:
 		state = 'crouching'
 	elif not on_floor:

@@ -85,10 +85,6 @@ func apply_movement(delta):
 		jump = false
 		faster_fall = false
 	
-	#var on_floor = is_on_floor()
-	move_and_slide()
-	
-	
 	# Dash
 	if dash:
 		dash = false
@@ -96,6 +92,10 @@ func apply_movement(delta):
 		dash_tween.tween_property(self, 'velocity:x', velocity.x + direction.x * 300, 0.3)
 		dash_tween.connect("finished", on_dash_finish)
 		gravity_multiplier = 0
+		
+		
+	#var on_floor = is_on_floor()
+	move_and_slide()
 
 func apply_gravity(delta):
 	velocity.y += gravity * delta
@@ -106,17 +106,6 @@ func apply_gravity(delta):
 func on_dash_finish():
 	velocity.x = move_toward(velocity.x, 0, 900)
 	gravity_multiplier = 1
-
-#func attack():
-	#attacking = true
-	##$Timers/AttackCooldown.start()
-	##attacking = true
-	##if $Timers/AttackCooldown.start:
-		##print("attack cooldown started")
-		##attacking = true
-		##if attacking:
-			##velocity.x = 0
-			##jump = false
 
 func _on_attack_finished():
 	attacking = false
